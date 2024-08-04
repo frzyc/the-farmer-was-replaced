@@ -4,6 +4,7 @@ from water_tile import *
 from globals import *
 
 
+# plant trees and carrots without polyculture.
 def handle_grass_tree():
     if can_harvest():
         harvest()

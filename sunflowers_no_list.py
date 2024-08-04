@@ -3,16 +3,20 @@ from water_tile import *
 from move_drone import *
 from move_to import *
 
+# Solution for sunflower without using lists. use sunflower_list once lists are unlocked.
 
-def plant_sunflowers():
-    if not (get_pos_x() == 0 and get_pos_y() == 0):
+
+def sunflowers_no_list():
+    # start at 0,0
+    if get_pos_x() != 0 or get_pos_y() != 0:
         return False
-	cost = get_cost(Items.Sunflower_Seed)
-	carr_cost = cost[Items.Carrot]
+
+    cost = get_cost(Items.Sunflower_Seed)
+    carr_cost = cost[Items.Carrot]
     # buy
     buy_num = get_world_size() * get_world_size() * 10
     if num_items(Items.Sunflower_Seed) <= buy_num:
-        if num_items(Items.Carrot) < (buy_num*carr_cost + get_min_carrots()):
+        if num_items(Items.Carrot) < (buy_num * carr_cost + get_min_carrots()):
             return False
         trade(Items.Sunflower_Seed, buy_num)
 

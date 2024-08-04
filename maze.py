@@ -1,14 +1,19 @@
 from solve_maze import *
+from globals import *
 
-clear()
-while True:
-    plant(Entities.Bush)
-    do_a_flip()
-    if num_items(Items.Fertilizer) < 100:
-        trade(Items.Fertilizer, 100)
-    for i in range(100):
-        use_item(Items.Fertilizer)
-        if get_entity_type() == Entities.Hedge:
+
+def maze():
+    if not buy(Items.Fertilizer, 100) or num_items(Items.Gold) > get_min(Items.Gold):
+        return False
+    clear()
+    while True:
+        plant(Entities.Bush)
+        do_a_flip()
+        if not buy(Items.Fertilizer, 100):
             break
-    if get_entity_type() == Entities.Hedge:
-        solve_maze()
+        while num_items(Items.Fertilizer):
+            use_item(Items.Fertilizer)
+            if get_entity_type() == Entities.Hedge:
+                break
+        if get_entity_type() == Entities.Hedge:
+            solve_maze()
